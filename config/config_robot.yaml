@@ -1,0 +1,46 @@
+# Robot Configuration for Soft Robotic System
+
+robot:
+  name: "soft_gripper_v1"
+  degrees_of_freedom: 4
+  control_mode: "position"    # options: position, velocity, torque
+  simulation: false           # true if using Gazebo or pybullet
+
+# Actuator Parameters
+actuators:
+  type: "pneumatic"
+  channels: 4
+  max_pressure: 100.0         # kPa
+  min_pressure: 0.0
+  control_loop_rate: 20.0     # Hz
+
+# Sensor Mounting and Calibration
+sensors:
+  pressure:
+    count: 4
+    units: "kPa"
+    calibration_file: "config/pressure_calib.yaml"
+  
+  flex:
+    count: 2
+    units: "degrees"
+    threshold_min: 10.0
+    threshold_max: 120.0
+
+  imu:
+    enabled: true
+    topic: "/imu/data"
+    orientation_covariance: 0.02
+    calibration_file: "config/imu_calib.yaml"
+
+# Safety Limits
+safety:
+  pressure_limit: 90.0       # kPa
+  max_bend_angle: 135.0      # degrees
+  emergency_stop_enabled: true
+
+# Hardware Interface
+interface:
+  use_can_bus: false
+  serial_port: "/dev/ttyUSB0"
+  baud_rate: 115200
