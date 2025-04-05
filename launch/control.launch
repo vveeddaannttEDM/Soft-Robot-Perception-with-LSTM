@@ -1,0 +1,12 @@
+<launch>
+  <arg name="config_file" default="$(find soft_robot_perception)/config/robot_config.yaml" />
+
+  <rosparam file="$(arg config_file)" command="load"/>
+
+  <node pkg="soft_robot_perception"
+        type="control_node.py"
+        name="control_node"
+        output="screen">
+    <param name="control_frequency" value="5.0"/>
+  </node>
+</launch>
