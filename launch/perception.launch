@@ -1,0 +1,12 @@
+<launch>
+  <arg name="params_file" default="$(find soft_robot_perception)/config/params.yaml" />
+
+  <rosparam file="$(arg params_file)" command="load"/>
+
+  <node pkg="soft_robot_perception"
+        type="perception_node.py"
+        name="perception_node"
+        output="screen">
+    <param name="debug" value="$(arg debug)" />
+  </node>
+</launch>
