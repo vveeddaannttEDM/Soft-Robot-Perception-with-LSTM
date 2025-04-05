@@ -1,0 +1,36 @@
+# LSTM Model Parameters
+model:
+  path: "/home/user/catkin_ws/src/Soft-Robot-Perception-with-LSTM/models/lstm_model.pth"
+  input_size: 6              # e.g. number of sensor inputs
+  hidden_size: 128
+  num_layers: 2
+  dropout: 0.3
+
+# Sensor Configuration
+sensor:
+  sampling_rate: 10.0        # Hz
+  input_normalization: true
+  sensor_topics:
+    - "/sensor/pressure"
+    - "/sensor/flex"
+    - "/sensor/imu"
+
+# Perception Node Parameters
+perception_node:
+  publish_topic: "/perception/data"
+  subscribe_topics:
+    - "/sensor/pressure"
+    - "/sensor/flex"
+  buffer_size: 100
+  prediction_threshold: 0.7
+
+# Control Node Parameters
+control_node:
+  subscribe_topic: "/perception/data"
+  command_topic: "/robot/command"
+  control_strategy: "threshold_based"   # options: threshold_based, ml_policy
+  command_frequency: 5.0                # Hz
+
+# Debug / Logging
+debug: true
+log_level: "info"
